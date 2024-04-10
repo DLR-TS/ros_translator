@@ -1,0 +1,42 @@
+[submodule "adore_if_ros_msg"]
+	path = ros1_packages/adore_if_ros_msg
+	url = git@github.com:dlr-ts/adore_if_ros_msg.git
+[submodule "adore_ros2_msgs"]
+	path = adore_ros2_msgs
+	url = git@github.com:dlr/ros2/adore_ros2_msgs.git
+[submodule "make_gadgets"]
+	path = make_gadgets
+	url = git@github.com:dlr-ts/make_gadgets.git
+[submodule "ros1_bridge"]
+	path = ros1_bridge
+	url = https://github.com/ros2/ros1_bridge.git
+[submodule "ros_noetic_on_jammy"]
+	path = ros_noetic_on_jammy
+	url = https://github.com/tinkerfuroc/ros_noetic_on_jammy.git
+[submodule "bridge_workspace/src/ros1_bridge"]
+	path = bridge_workspace/src/ros1_bridge
+	url = https://github.com/ros2/ros1_bridge.git
+[submodule "ros1_packages/shared_msgs"]
+	path = ros1_packages/shared_msgs
+	url = git@gitlab.dlr.de:ud2/shared_msgs.git
+[submodule "ros2_packages/adore_ros2_msgs"]
+	path = ros2_packages/adore_ros2_msgs
+	url = git@gitlab.dlr.de:csa/ros2/adore_ros2_msgs.git
+[submodule "ros1_packages/catkin_simple"]
+	path = ros1_packages/catkin_simple
+	url = https://github.com/catkin/catkin_simple.git
+[submodule "ros1_packages/rosmsg"]
+	path = ros1_packages/rosmsg
+	url = git@github.com:foxglove/rosmsg.git
+[submodule "ros1_packages/schemas"]
+	path = ros1_packages/schemas
+	url = git@github.com:foxglove/schemas.git
+[submodule "ros1_packages/common_msgs"]
+	path = ros1_packages/common_msgs
+	url = https://github.com/ros/common_msgs.git
+[submodule "ros1_packages/adore_if_ros_msg"]
+	path = ros1_packages/adore_if_ros_msg
+	url = https://github.com/dlr-ts/adore_if_ros_msg.git
+[submodule "ros2_packages/common_interfaces"]
+	path = ros2_packages/common_interfaces
+	url = https://github.com/ros2/common_interfaces.git

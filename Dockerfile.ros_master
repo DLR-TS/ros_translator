@@ -1,0 +1,19 @@
+FROM ros:noetic-ros-core
+
+ARG ROS1_DISTRO=noetic
+ENV ROS1_DISTRO=$ROS1_DISTRO
+ARG ROS1_WORKSPACE=/tmp/ros1_ws
+ENV ROS1_WORKSPACE=$ROS1_WORKSPACE
+
+RUN apt-get update && apt-get install -y make g++
+
+RUN mkdir -p /tmp/ros1_ws/src
+COPY ros1_packages/adore_if_ros_msg/adore_if_ros_msg/ /tmp/ros1_ws/src
+
+RUN bash -c 'cd /tmp/ros1_ws && source /opt/ros/noetic/setup.bash && catkin_make'
+
+WORKDIR /
+COPY files/ros1.env .
+COPY files/ros-master_entrypoint.sh .
+ENTRYPOINT bash ros-master_entrypoint.sh
+

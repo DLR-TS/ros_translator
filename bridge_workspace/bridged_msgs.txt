@@ -1,0 +1,53 @@
+# Add any messages that should be bridged to this file. 
+# It should contain the file name only e.g., Action.msg
+# One file per line, no quotes, no package name
+
+# adore_if_ros_msg
+adore_if_ros_msg/adore_if_ros_msg/msg/Action.msg
+
+# shared_msgs
+shared_msgs/shared_msgs/bob_perception_msgs/msg/AssociatedTrackedOrientedBoxArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/ImageDictionary.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedCuboidArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/BoxDetectionArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/Classification.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/InstanceSegmentation.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedCuboid.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/BoxDetection.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedPoint.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/AssociatedTrackedOrientedBoxArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/BoxTrajectoryArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/ExtendedTrackedOrientedBox.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/CuboidArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/ExtendedTrackedOrientedBoxArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedLaserScan.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/ExtendedOrientedBox.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/SparseOpticalFlow.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedOrientedBox.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedBox.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/FramePos.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/BoxTrajectory.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedOrientedBoxArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedBoxArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedOrientedBoxV2x.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/CuboidVertex.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/Cuboid.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/PointDetection.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedOrientedBoxV2xArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/OrientedBox.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/ObjectLevelFusionResult.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/InstanceSegmentationArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/TrackedPointArray.msg
+shared_msgs/shared_msgs/bob_perception_msgs/msg/DenseOpticalFlow.msg
+
+shared_msgs/shared_msgs/bob_common_msgs/msg/StringStamped.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/ImagePair.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/Uint32Stamped.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/BoolStamped.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/MapIntToStringArray.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/NamedImage.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/Float64ArrayStamped.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/KeyIntValueStringArray.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/Float64Stamped.msg
+shared_msgs/shared_msgs/bob_common_msgs/msg/StringArray.msg
+

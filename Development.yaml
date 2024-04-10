@@ -1,0 +1,102 @@
+version: '3.5'
+
+services:
+  ros_dynamic_bridge:
+    image: ros_translator:${TAG}
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    user: "${UID}:${GID}"
+    environment:
+      - "ROS_MASTER_URI=http://0.0.0.0:11311"
+      - "ROS_HOSTNAME=0.0.0.0"
+      - "ROS1_DISTRO=noetic"
+#      - "ROS2_DISTRO=foxy"
+      - "ROS2_DISTRO=iron"
+      - "BRIDGE_WORKSPACE=/home/${USER}/bridge_workspace"
+      - "ROS1_WORKSPACE=/home/${USER}/ros1_ws"
+      - "ROS2_WORKSPACE=/home/${USER}/ros2_ws"
+    depends_on:
+      - ros-master
+    build:
+      context: . 
+      network: host
+      dockerfile: Dockerfile.ros_bridge 
+      args:
+        - USER=${USER}
+        - UID=${UID}
+        - GID=${GID}
+        - "ROS1_DISTRO=noetic"
+#       - "ROS2_DISTRO=foxy"
+        - "ROS2_DISTRO=iron"
+        - "BRIDGE_WORKSPACE=/home/${USER}/bridge_workspace"
+        - "ROS1_WORKSPACE=/home/${USER}/ros1_ws"
+        - "ROS2_WORKSPACE=/home/${USER}/ros2_ws"
+    ports:
+      # for python debugger- "12345:12345"
+      - "49152-65535:49152-65535/udp"
+      - "32768-65535:32768-65535/tcp"
+    volumes:
+      - ./bridge_workspace/src/ros1_bridge:${BRIDGE_WORKSPACE}/src/ros1_bridge
+      - ./bags:${BRIDGE_WORKSPACE}/bags
+        #      - /usr/local/lib/python3.10/dist-packages/_pydevd_bundle:/usr/local/lib/python3.10/dist-packages/_pydevd_bundle
+
+  ros-master:
+    image: ros_translator_master:${TAG}
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    build:
+      context: . 
+      network: host
+      dockerfile: Dockerfile.ros_master 
+    environment:
+      - "ROS1_DISTRO=noetic"
+      - "ROS_MASTER_URI=http://0.0.0.0:11311"
+      - "ROS_HOSTNAME=0.0.0.0"
+      - "ROS1_WORKSPACE=/tmp/ros1_ws"
+    restart: always
+
+
+
+  bridge-heartbeat:
+    image: ros_translator_master:${TAG}
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    depends_on:
+      - ros-master
+    environment:
+      - "ROS_MASTER_URI=http://0.0.0.0:11311"
+      - "ROS1_WORKSPACE=/tmp/ros1_ws"
+    entrypoint: [""]
+    command: ["bash", "-c", "source ros1.env && rostopic pub /ros_bridge_heartbeat std_msgs/String 'ros_translator active' -r 1"]
+    restart: always
+
+  bridge-debug-publisher-1to2:
+    image: ros_translator:${TAG}
+    #profiles:
+     #  - donotstart
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    depends_on:
+      - ros-master
+      - ros_dynamic_bridge
+    entrypoint: [""]
+    command: ["bash", "-c", "source ros1.env && rostopic pub /translator_1to2 adore_if_ros_msg/Action '{action: 1}'"]
+    restart: always
+
+  bridge-debug-publisher-2to1:
+    image: ros_translator:${TAG}
+    #profiles:
+     #  - donotstart
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    depends_on:
+      - ros-master
+      - ros_dynamic_bridge
+    entrypoint: [""]
+    command: ["bash", "-c", "source ros2.env && ros2 topic pub /translator_2to1 adore_if_ros_msg/Action '{action: 2}' -r 4"]
+    restart: always

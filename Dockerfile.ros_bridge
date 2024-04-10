@@ -1,0 +1,70 @@
+#FROM ros:foxy-ros1-bridge-focal
+
+FROM ros:iron-ros-core
+
+ARG USER
+ARG UID
+ARG GID
+ENV USER=$USER
+ENV UID=$UID 
+ENV GID=$GID
+
+
+ARG ROS1_DISTRO=noetic
+ENV ROS1_DISTRO=$ROS1_DISTRO
+ARG ROS2_DISTRO=iron
+ENV ROS2_DISTRO=$ROS2_DISTRO
+ARG BRIDGE_WORKSPACE=/tmp/bridge_workspace
+ENV BRIDGE_WORKSPACE=$BRIDGE_WORKSPACE
+ARG ROS1_WORKSPACE=/tmp/ros1_ws
+ENV ROS1_WORKSPACE=$ROS1_WORKSPACE
+
+COPY files/build_ros_noetic.sh .
+RUN bash build_ros_noetic.sh
+
+RUN apt-get update 
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh 
+
+RUN mkdir -p ${ROS1_WORKSPACE}/src
+RUN mkdir -p ${ROS2_WORKSPACE}/src
+
+COPY ros1_packages/ ${ROS1_WORKSPACE}/src/
+
+RUN useradd --create-home ${USER}
+RUN usermod -u ${UID} ${USER} && groupmod -g ${GID} ${USER}
+RUN chown -R ${UID}:${GID} /home/${USER}
+
+RUN apt-get update && apt-get -y install python3-colcon-common-extensions
+RUN set -x;find ${ROS1_WORKSPACE} -type f -name 'requirements.system' -exec cat {} + | \
+    apt-get update && \
+    apt-get install -y $(sed 's/#.*//' {}) && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN chown -R ${USER}:${USER} /home/${USER}
+USER ${USER}
+RUN  cd ${ROS1_WORKSPACE}; rm src/adore_if_ros_msg/CATKIN_IGNORE; source /opt/ros/${ROS1_DISTRO}/setup.bash; catkin_make
+
+
+USER root
+RUN apt-get update && apt-get -y install python3-rosmsg ros-iron-common-interfaces
+
+USER root 
+COPY bridge_workspace/ ${BRIDGE_WORKSPACE}
+COPY ros2_packages/common_interfaces/ ${BRIDGE_WORKSPACE}/src/common_interfaces
+RUN chown -R ${USER}:${USER} /home/${USER}
+USER ${USER}
+RUN cd ${BRIDGE_WORKSPACE} && bash build_packages.sh 
+#RUN apt-get install -y python3-pip && python3 -m pip install jsonpickle pydevd-pycharm~=233.13763.11
+RUN cd ${BRIDGE_WORKSPACE} && bash build_ros1_bridge.sh 
+
+
+WORKDIR /home/${USER}
+COPY files/ros1.env .
+COPY files/ros2.env .
+COPY files/ros1_bridge.env .
+COPY files/ros_bridge_entrypoint.sh .
+
+WORKDIR /home/${USER}
+ENTRYPOINT bash ros_bridge_entrypoint.sh
+
