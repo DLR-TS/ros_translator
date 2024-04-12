@@ -28,7 +28,6 @@
   <build_depend>sensor_msgs</build_depend>
   <exec_depend>sensor_msgs</exec_depend>
 
-  <depend>bob_common_msgs</depend>
 
 
   <export>

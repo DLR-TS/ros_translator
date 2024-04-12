@@ -16,9 +16,6 @@
 [submodule "bridge_workspace/src/ros1_bridge"]
 	path = bridge_workspace/src/ros1_bridge
 	url = https://github.com/ros2/ros1_bridge.git
-[submodule "ros1_packages/shared_msgs"]
-	path = ros1_packages/shared_msgs
-	url = git@gitlab.dlr.de:ud2/shared_msgs.git
 [submodule "ros2_packages/adore_ros2_msgs"]
 	path = ros2_packages/adore_ros2_msgs
 	url = git@gitlab.dlr.de:csa/ros2/adore_ros2_msgs.git

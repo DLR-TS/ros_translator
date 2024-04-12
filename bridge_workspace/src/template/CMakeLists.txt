@@ -31,7 +31,6 @@ rosidl_generate_interfaces(${PROJECT}
   shape_msgs
   nav_msgs
   std_msgs
-  bob_common_msgs
   sensor_msgs
   geometry_msgs
   builtin_interfaces
